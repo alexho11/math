@@ -6,17 +6,19 @@ from tri import tri
 
 p=[(0.3,0.4),(0.4,0.2),(0.5,0.6),(0.2,0.7)]#points
 
+def addPoint(p):
+    while(1):
+        pn=input("coordinate(x,y) (0=exit): ").split(',')
+        pn=[float(i) for i in pn]
+        if pn == [0]:
+            break
+        elif np.isreal(pn).all()==True and len(pn)==2:
+            pn=p.append(pn)
+        else:
+            print("Invalid")
+    return p
 
-while(1):
-    pn=input("coordinate(x,y) (0=exit): ").split(',')
-    pn=[float(i) for i in pn]
-    if pn == [0]:
-        break
-    elif np.isreal(pn).all()==True and len(pn)==2:
-        pn=p.append(pn)
-    else:
-        print("Invalid")
-
+p=addPoint(p)
 n=len(p)-1
 pix,piy=tri(p)
 x,y=lin(p)
@@ -29,16 +31,7 @@ for i in range(n+1):
 plt.legend()
 plt.show(block=False)
 
-while(1):
-    pn=input("coordinate(x,y) (0=exit): ").split(',')
-    pn=[float(i) for i in pn]
-    if pn == [0]:
-        break
-    elif np.isreal(pn).all()==True and len(pn)==2:
-        pn=p.append(pn)
-    else:
-        print("Invalid")
-
+p=addPoint(p)
 n=len(p)-1
 pix,piy=tri(p)
 x,y=lin(p)
