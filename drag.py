@@ -3,16 +3,25 @@ import matplotlib.patches as patches
 from linear import lin
 from tri import tri
 
+ann_list=[]
 def plot(p):
+    global ann_list
     n=len(p)-1
     pix,piy=tri(p)
     x,y=lin(p)
-    plt.plot(x,y,label='linear interpolat')
-    plt.plot(pix,piy,label='trigonometric interpolat')
+    l1.set_xdata(x)
+    l1.set_ydata(y)
+    l2.set_xdata(pix)
+    l2.set_ydata(piy)
+    for ann in ann_list:
+        ann.remove()
+    ann_list=[]
     for i in range(n+1):
-        plt.annotate('p'+str(i),p[i],(p[i][0]+0.01,p[i][1]+0.01))#annotate
-    plt.legend()
+        ann=plt.annotate('p'+str(i),p[i],(p[i][0]+0.01,p[i][1]+0.01))#annotate
+        ann_list.append(ann)
     fig.canvas.draw()
+    fig.canvas.flush_events()
+    
 
 class DraggablePoints(object):
     def __init__(self, artists, tolerance=5):
@@ -74,10 +83,12 @@ if __name__ == '__main__':
     n=len(p)-1
     pix,piy=tri(p)
     x,y=lin(p)
-    plt.plot(x,y,label='linear interpolat')
-    plt.plot(pix,piy,label='trigonometric interpolat')
+    l1,=plt.plot(x,y,label='linear interpolat')
+    l2,=plt.plot(pix,piy,label='trigonometric interpolat')
+    ann_list=[]
     for i in range(n+1):
-        plt.annotate('p'+str(i),p[i],(p[i][0]+0.01,p[i][1]+0.01))#annotate
+        ann=plt.annotate('p'+str(i),p[i],(p[i][0]+0.01,p[i][1]+0.01))#annotate
+        ann_list.append(ann)
     plt.legend()
     plt.show(block=False)
 
