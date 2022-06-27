@@ -4,10 +4,9 @@ import sympy as sp
 from linear import lin
 from tri import tri
 from addPoint import addPoint
+
 p=[(0.3,0.4),(0.4,0.2),(0.5,0.6),(0.2,0.7)]#points
 
-
-p=addPoint(p)
 n=len(p)-1
 pix,piy=tri(p)
 x,y=lin(p)
